@@ -13,3 +13,16 @@
 5. "추가 종속성" 속성을 편집하고, ws2_32.lib를 추가합니다.
 6. 변경 사항을 저장하고 프로젝트를 다시 빌드합니다.
 위의 단계를 따라 ws2_32.lib를 추가하면 소켓 관련 함수들을 올바르게 링크하여 오류가 해결될 것입니다.
+
+> 개인키 생성
+```
+openssl genpkey -algorithm RSA -out private.key
+```
+> 인증서 생성
+```
+openssl req -new -key private.key -out csr.csr
+```
+> 자체 서명 인증서 생성
+```
+openssl req -x509 -sha256 -days 365 -key private.key -in csr.csr -out certificate.crt
+```
